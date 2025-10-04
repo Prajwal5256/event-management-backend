@@ -1,13 +1,10 @@
-const express = require("express");
-const dotenv = require("dotenv");
-const mongoose = require("mongoose");
+import dotenv from "dotenv";
+import mongoose from "mongoose";
+import app from "./app.js";
 
 dotenv.config();
 
-const app = express();
 const PORT = process.env.PORT || 5001;
-
-app.use(express.json());
 
 // MongoDB Connection
 mongoose.connect(process.env.MONGO_URI)
@@ -20,8 +17,3 @@ mongoose.connect(process.env.MONGO_URI)
   .catch(err => {
     console.error("❌ MongoDB Connection Error:", err);
   });
-
-// Routes
-app.get("/", (req, res) => {
-  res.send("Hello from Express + local MongoDB backend!");
-});
