@@ -1,10 +1,22 @@
 import express from "express";
+import cors from "cors";
 import userRoutes from "../routes/userRoute.js";
+
 const app = express();
 
-// Middleware
+// ------------------- MIDDLEWARE -------------------
+
+// Parse JSON bodies
 app.use(express.json());
-app.use('/api/users', userRoutes);
+
+// Enable CORS for React frontend
+app.use(cors({
+  origin: "http://localhost:3000", // your React dev server
+  credentials: true,
+}));
+
+// ------------------- ROUTES -------------------
+app.use("/api/users", userRoutes);
 
 // Test route
 app.get("/", (req, res) => {
